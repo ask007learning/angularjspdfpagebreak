@@ -28,22 +28,23 @@ export class AppComponent implements OnInit {
     // this.generatePdfFromCode();
   }
 
-  setFontType(pdf, type: string = "normal", font: string = "times") {
+  setFontType(pdf, type: string = "normal", font: string = "helvetica") {
     pdf.setFont(font, type);
     return pdf;
   }
 
   splitStringPdf(pdf, txt, indent = "true") {
-    const para = pdf.splitTextToSize(indent ? "     " + txt : txt, 190);
+    const para = pdf.splitTextToSize(indent ? "     " + txt : txt, 175);
     return para;
   }
 
   generatePdfFromCode() {
     let marginY = 5;
     let marginX = 35;
-    const pdf = new jsPDF("p", "mm", "a4");
+    const pdf = new jsPDF("p", "mm", "legal");
     // const pdf = new jsPDF("p", "mm", [ 595.28,  841.89])
     // const pdf = new jsPDF();
+    console.log(pdf.getFontList());
 
     this.setFontType(pdf);
 
@@ -73,9 +74,9 @@ export class AppComponent implements OnInit {
     //   marginY
     // );
 
-    pdf.setFontSize(12);
-    pdf.text("November 4, 2020", marginX, (marginY += 35));
-    pdf.text("Dear Owner name,", marginX, (marginY += 5));
+    pdf.setFontSize(11);
+    pdf.text("November 4, 2021", marginX, (marginY += 35));
+    pdf.text("Dear Owner name,", marginX, (marginY += 10));
 
     const para1 = this.splitStringPdf(
       pdf,
@@ -91,12 +92,14 @@ export class AppComponent implements OnInit {
     );
 
     pdf.autoTable({
+      theme: "grid",
+      headStyles: { fillColor: [74, 112, 144] },
       margin: { left: marginX, top: marginY += 3 },
       head: [
         [
           "SAMPLE LOCATION",
-          "SAFE LEVEL (ug/ft2)",
-          "RESULTS (ug/ft2)",
+          "SAFE LEVEL (µg/ft²)",
+          "RESULTS (µg/ft²)",
           "SAFE/UNSAFE"
         ]
       ],
@@ -111,7 +114,7 @@ export class AppComponent implements OnInit {
     this.setFontType(pdf);
     const para2 = this.splitStringPdf(
       pdf,
-      `In general, EPA considers any floor dust results below 10 micrograms per square foot (ug/ft2) to be safe. Windowsill samples are safe when they are below 100 (ug/ft2).`
+      `In general, EPA considers any floor dust results below 10 micrograms per square foot (µg/ft²) to be safe. Windowsill samples are safe when they are below 100 (µg/ft²).`
     );
     pdf.text(marginX, (marginY += 45), para2);
 
@@ -169,7 +172,7 @@ export class AppComponent implements OnInit {
     );
     pdf.text(marginX, (marginY += 25), para7);
 
-    pdf.text("Naudia McCracken, MPH", marginX, (marginY += 20));
+    pdf.text("Naudia McCracken, MPH", marginX, (marginY += 25));
     pdf.text("Acting Program Supervisor", marginX, (marginY += 5));
     pdf.text(
       "Childhood Lead Poisoning Prevention Program",
