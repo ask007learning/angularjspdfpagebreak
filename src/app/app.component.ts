@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // this.paragraphs$ = this.http.get<any[]>(
-    //   "https://jsonplaceholder.typicode.com/comments"
+    //   "https://jsonplaceholder.typicode.com/comments" 
     // );
     this.htmltoPDF();
     // this.generatePdfFromCode();
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
   generatePdfFromCode() {
     let marginY = 5;
-    let marginX = 10;
+    let marginX = 35;
     const pdf = new jsPDF("p", "mm", "a4");
     // const pdf = new jsPDF("p", "mm", [ 595.28,  841.89])
     // const pdf = new jsPDF();
@@ -50,20 +50,20 @@ export class AppComponent implements OnInit {
     pdf.addImage(
       "https://raw.githubusercontent.com/ask007learning/angularjspdfpagebreak/master/src/assets/dustLogoTop.jpg",
       "JPEG",
-      marginX + 30,
+      marginX,
       marginY,
       160,
       25
     );
 
-    // pdf.addImage(
-    //   "https://raw.githubusercontent.com/ask007learning/angularjspdfpagebreak/master/src/assets/dustLogoSide.jpg",
-    //   "JPEG",
-    //   marginX ,
-    //   marginY + 30,
-    //   25,
-    //   200
-    // );
+    pdf.addImage(
+      "https://raw.githubusercontent.com/ask007learning/angularjspdfpagebreak/master/src/assets/dustLogoSide1.jpg",
+      "JPEG",
+      5,
+      marginY + 30,
+      25,
+      210
+    );
 
     //Header
     // pdf.setFontSize(14);
