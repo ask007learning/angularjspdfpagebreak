@@ -28,10 +28,25 @@ export class AppComponent implements OnInit {
     this.generatePdfFromCode();
   }
 
+  setFontType(pdf, type: string = "normal", font: string = "times") {
+    pdf.setFont(font, type);
+    return pdf;
+  }
+
   generatePdfFromCode() {
     let marginY = 20;
     let marginX = 10;
     const pdf = new jsPDF();
+    this.setFontType(pdf);
+
+    pdf.addImage(
+      "assets/dustLogo2.jpg",
+      "JPEG",
+      marginX + 20,
+      marginY + 30,
+      50,
+      50
+    );
 
     //Header
     // pdf.setFontSize(14);
@@ -51,7 +66,7 @@ export class AppComponent implements OnInit {
     );
     pdf.text(marginX, (marginY += 10), para1);
 
-    pdf.setFontType("bold");
+    this.setFontType(pdf, "bold");
     pdf.text(
       "Street Address/Said-Resident ID: Date of Sampling",
       marginX,
@@ -76,55 +91,55 @@ export class AppComponent implements OnInit {
       ]
     });
 
-    pdf.setFontType("normal");
+    this.setFontType(pdf);
     const para2 = this.splitStringPdf(
       pdf,
       `In general, EPA considers any floor dust results below 10 micrograms per square foot (ug/ft2) to be safe. Windowsill samples are safe when they are below 100 (ug/ft2).`
     );
     pdf.text(marginX, (marginY += 45), para2);
 
-    pdf.setFontType("bold");
+    this.setFontType(pdf, "bold");
     pdf.text("If all results are LOW", marginX, (marginY += 15));
-    pdf.setFontType("normal");
+    this.setFontType(pdf);
     const para3 = this.splitStringPdf(
       pdf,
       `All of the dust samples collected from your home were below a level considered hazardous to children seven years of age or younger.`
     );
     pdf.text(marginX, (marginY += 5), para3);
 
-    pdf.setFontType("bold");
+    this.setFontType(pdf, "bold");
     pdf.text(
       "If one or more of the floor samples is 10 or more:",
       marginX,
       (marginY += 15)
     );
-    pdf.setFontType("normal");
+    this.setFontType(pdf);
     const para4 = this.splitStringPdf(
       pdf,
       `At least one of the samples from the floor of your home had a lead level that would be considered unsafe for children seven years of age or younger. The Douglas County Health Department has developed a Fact Sheet which includes tips that will help reduce the amount of lead in your home. Following these tips will help reduce the amount of lead dust in your house. A copy of this fact sheet is enclosed with this letter.`
     );
     pdf.text(marginX, (marginY += 5), para4);
 
-    pdf.setFontType("bold");
+    this.setFontType(pdf, "bold");
     pdf.text(
       "If the windowsill sample is 100 or greater:",
       marginX,
       (marginY += 30)
     );
-    pdf.setFontType("normal");
+    this.setFontType(pdf);
     const para5 = this.splitStringPdf(
       pdf,
       `The dust collected from your windowsill is at a level that would be considered hazardous to children seven years of age or younger. Wipe dust off windowsills often to reduce human exposure. In addition, the Douglas County Health Department has developed a Fact Sheet which includes tips that will help reduce the amount of lead in your home. Following these tips will reduce the amount of lead tracked into your home. A copy of this fact sheet is enclosed with this letter.`
     );
     pdf.text(marginX, (marginY += 5), para5);
 
-    pdf.setFontType("bold");
+    this.setFontType(pdf, "bold");
     pdf.text(
       "If both floor and windowsill samples are high:",
       marginX,
       (marginY += 30)
     );
-    pdf.setFontType("normal");
+    this.setFontType(pdf);
     const para6 = this.splitStringPdf(
       pdf,
       `The dust collected from your floor and windowsill are at levels that would be considered hazardous to children seven years of age or younger. The Douglas County Health Department has developed a Fact Sheet which includes tips that will help reduce the lead in your home. A copy of this fact sheet is enclosed with this letter.`
