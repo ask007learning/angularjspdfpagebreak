@@ -25,7 +25,6 @@ export class AppComponent implements OnInit {
     //   "https://jsonplaceholder.typicode.com/comments"
     // );
     this.htmltoPDF();
-    // this.generatePdfFromCode();
   }
 
   setFontType(pdf, type: string = "normal", font: string = "helvetica") {
@@ -38,14 +37,130 @@ export class AppComponent implements OnInit {
     return para;
   }
 
-  generatePdfFromCode() {
-    let marginY = 5;
-    let marginX = 35;
-    const pdf = new jsPDF("p", "mm", "legal");
+  buildReport() {
     // const pdf = new jsPDF("p", "mm", [ 595.28,  841.89])
     // const pdf = new jsPDF();
-    console.log(pdf.getFontList());
+    const pdf = new jsPDF("p", "mm", "legal");
+    //this.dustEnglishVersion(pdf);
+    //pdf.addPage();
+    this.dustSpanishVersion(pdf);
+    return pdf;
+  }
 
+  dustSpanishVersion(pdf: jsPDF) {
+    let marginY = 5;
+    let marginX = 35;
+    this.setFontType(pdf);
+    pdf.setFontSize(11);
+    pdf.text("November 4, 2021", marginX, (marginY += 25));
+    pdf.text("Owners name:", marginX, (marginY += 10));
+
+    const para1 = this.splitStringPdf(
+      pdf,
+      `El Departamento de Salud de Douglas y la Agencia de Protección Ambiental visitaron su casa con los propósitos de dar educación sobre la salud y hacer una prueba de polvo de plomo. El polvo colectado en su casa ha sido analizado y los resultados se le están enviado en esta carta.`
+    );
+    pdf.text(marginX, (marginY += 10), para1);
+
+    this.setFontType(pdf, "bold");
+    pdf.text(
+      "Street Address/Said-Resident ID: Date of Sampling",
+      marginX,
+      (marginY += 20)
+    );
+
+    pdf.autoTable({
+      theme: "grid",
+      headStyles: { fillColor: [74, 112, 144] },
+      margin: { left: marginX, top: marginY += 3 },
+      head: [
+        [
+          "UBICACIÓN DE PRUEBA",
+          "NIVEL SEGURO (µg/ft²)",
+          "RESULTADO (µg/ft²)",
+          "SEGURO/INSEGURO"
+        ]
+      ],
+      body: [
+        ["T", "10", "", ""],
+        ["W", "10", "", ""],
+        ["R", "10", "", ""],
+        ["S", "10", "", ""]
+      ]
+    });
+
+    // debajo de 10 Microgramos por pie cuadrado (μg/ft2) el ser seguro. Las muestras de repisas de ventanas son seguras cuando están debajo de 100 (μg/ft2). (µg/ft²)
+    this.setFontType(pdf);
+    const para2 = this.splitStringPdf(
+      pdf,
+      `En general, la Agencia de Protección Ambiental considera cualquier resultado de polvo de piso debajo de 10 microgramos por pie cuadrado (µg/ft²) el ser seguro. Las muestras de ventanas son seguras cuando están debajo de 100 (µg/ft²).`
+    );
+    pdf.text(marginX, (marginY += 45), para2);
+
+    this.setFontType(pdf, "bold");
+    pdf.text("Si todos los resultados son BAJOS:", marginX, (marginY += 20));
+    this.setFontType(pdf);
+    const para3 = this.splitStringPdf(
+      pdf,
+      `Todas las muestras de polvo colectadas en su hogar estuvieron debajo de un nivel considerado peligroso para niños de seis años o menores de esta edad.`
+    );
+    pdf.text(marginX, (marginY += 5), para3);
+
+    this.setFontType(pdf, "bold");
+    pdf.text(
+      "Si una o más de nuestras muestras del piso es 10 o más:",
+      marginX,
+      (marginY += 15)
+    );
+    this.setFontType(pdf);
+    const para4 = this.splitStringPdf(
+      pdf,
+      `Por lo menos una de las muestras del piso de su hogar tuvo un nivel de plomo que se considera inseguro para un niño de seis años de edad o menor de esta edad. El Departamento de Salud del Condado de Douglas ha creado una hoja de datos que incluye consejos para ayudar a reducir la cantidad de plomo en su hogar. El seguir estos consejos ayudara a reducir la cantidad de polvo de plomo en su casa. La copia de la hoja de datos ha sido incluida en esta carta.`
+    );
+    pdf.text(marginX, (marginY += 5), para4);
+
+    this.setFontType(pdf, "bold");
+    pdf.text("Si la repisa de ventana es 100 o más:", marginX, (marginY += 25));
+    this.setFontType(pdf);
+    const para5 = this.splitStringPdf(
+      pdf,
+      `El polvo colectado en la repisa de su ventana está a un nivel que se considera peligroso para niños de seis años o menores de esta edad.  Sacuda en húmedo el polvo de su repisa de ventana para reducir la exposición. Adicionalmente, el Departamento de Salud del Condado de Douglas ha creado una hoja de datos que incluye consejos para ayudar a reducir la cantidad de plomo en su hogar. El seguir estos consejos ayudara a reducir la cantidad de polvo de plomo en su casa. La copia de esta hoja de datos ha sido incluida en esta carta.`
+    );
+    pdf.text(marginX, (marginY += 5), para5);
+
+    this.setFontType(pdf, "bold");
+    pdf.text(
+      "Si las dos pruebas, de piso y de repisa de ventanas son altas",
+      marginX,
+      (marginY += 30)
+    );
+    this.setFontType(pdf);
+    const para6 = this.splitStringPdf(
+      pdf,
+      `El polvo colectado en el piso y  repisa de su ventana está a un nivel que se considera peligroso para niños de seis años o menores de esta edad. El Departamento de Salud del Condado de Douglas ha creado una hoja de datos que incluye consejos para ayudar a reducir la cantidad de plomo en su hogar. La copia de esta hoja de datos ha sido incluida en esta carta.`
+    );
+    pdf.text(marginX, (marginY += 5), para6);
+
+    const para7 = this.splitStringPdf(
+      pdf,
+      `El Departamento de Salud del Condado de Douglas tiene un programa activo de prevención de niveles de plomo en la infancia. Este programa está siempre disponible para responder a sus preguntas y ofrecer dirección para la promoción de un ambiente seguro en casa. Nuestro personal puede ser contactado al: (402) 444-7825.`
+    );
+    pdf.text(marginX, (marginY += 25), para7);
+
+    pdf.text("Naudia McCracken, MPH", marginX, (marginY += 25));
+    pdf.text("Acting Program Supervisor", marginX, (marginY += 5));
+    pdf.text(
+      "Childhood Lead Poisoning Prevention Program",
+      marginX,
+      (marginY += 5)
+    );
+    pdf.text("Division of Environmental Health", marginX, (marginY += 5));
+    return pdf;
+  }
+
+  dustEnglishVersion(pdf: jsPDF) {
+    let marginY = 5;
+    let marginX = 35;
+    // console.log(pdf.getFontList());
     this.setFontType(pdf);
 
     pdf.addImage(
@@ -65,14 +180,6 @@ export class AppComponent implements OnInit {
       25,
       210
     );
-
-    //Header
-    // pdf.setFontSize(14);
-    // pdf.text(
-    //   "To Protect, Promote, and Prioritize the Health of our Entire Community",
-    //   marginX,
-    //   marginY
-    // );
 
     pdf.setFontSize(11);
     pdf.text("November 4, 2021", marginX, (marginY += 35));
@@ -180,20 +287,11 @@ export class AppComponent implements OnInit {
       (marginY += 5)
     );
     pdf.text("Division of Environmental Health", marginX, (marginY += 5));
-
     return pdf;
-
-    const iframe = document.createElement("iframe");
-    iframe.setAttribute(
-      "style",
-      "position:absolute;right:0; top:0; bottom:0; height:100%; width:650px; padding:20px;"
-    );
-    document.body.appendChild(iframe);
-    iframe.src = pdf.output("datauristring");
   }
 
   htmltoPDF() {
-    const pdf = this.generatePdfFromCode();
+    const pdf = this.buildReport();
     const iframe = document.createElement("iframe");
     iframe.setAttribute(
       "style",
@@ -205,12 +303,12 @@ export class AppComponent implements OnInit {
 
   downloadPDF(margins = this.margins) {
     // content is the html element which has to be converted to PDF
-    const pdf = this.generatePdfFromCode();
+    const pdf = this.buildReport();
     pdf.save("file.pdf");
   }
 
   viewInTab() {
-    const pdf = this.generatePdfFromCode();
+    const pdf = this.buildReport();
     window.open(pdf.output("bloburl"), "_blank");
   }
 }
