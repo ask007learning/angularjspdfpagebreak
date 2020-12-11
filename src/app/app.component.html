@@ -1,14 +1,14 @@
 <div id="dustReport" class="container">
-  <div class="col-md-12">
-    <button
+	<div class="col-md-12">
+		<button
       type="button"
       class="btn btn-primary mt-2 mb-2"
-      (click)="htmltoPDF()"
+      (click)="viewInTab()"
       autofocus
     >
-      view
+      View in tab
     </button>
-    <button
+		<button
       type="button"
       class="btn btn-primary mt-2 mb-2"
       (click)="downloadPDF()"
@@ -16,113 +16,111 @@
     >
       download
     </button>
-  </div>
+	</div>
 
-  <div style="" id="content">
-    <p>November 4, 2020</p>
-    <p>Dear Owner name</p>
-    <p>
-      The Douglas County Health Department and the Environmental Protection
-      Agency visited your home for the purposes of health education and house
-      dust sampling on Date of Sampling. Dust collected from your home has been
-      analyzed and the results are being sent to you in this letter.
-    </p>
-    <table
-      style="width:100%;
-       "
-    >
-      <colgroup>
-          <col width="10%">
-          <col width="20%">
-          <col width="20%">
-          <col width="60%">
-        </colgroup>
-      <thead>
-        <tr>
-          <td>Sample Location</td>
-          <td>SAFE LEVEL (ug/ft2)</td>
-          <td>RESULTS (ug/ft2)</td>
-         <td>SAFE/UNSAFE</td>
-        </tr>
-      </thead>
-      <tr *ngFor="let a of dustAsmts">
-        <td>{{a.location}}</td>
-        <td>{{a.safeLevel}}</td>
-        <td>{{a.result}}</td>
-        <td></td>
-      </tr>
-    </table>
+	<div style="display: none;" id="content">
+		<p>November 4, 2020</p>
+		<p>Dear Owner name</p>
+		<p>
+			The Douglas County Health Department and the Environmental Protection
+			Agency visited your home for the purposes of health education and house
+			dust sampling on Date of Sampling. Dust collected from your home has been
+			analyzed and the results are being sent to you in this letter.
+		</p>
+		<table style="width:100%;
+       ">
+			<colgroup>
+				<col width="10%">
+				<col width="20%">
+				<col width="20%">
+				<col width="60%">
+			</colgroup>
+			<thead>
+				<tr>
+					<td>Sample Location</td>
+					<td>SAFE LEVEL (ug/ft2)</td>
+					<td>RESULTS (ug/ft2)</td>
+					<td>SAFE/UNSAFE</td>
+				</tr>
+			</thead>
+			<tr *ngFor="let a of dustAsmts">
+				<td>{{a.location}}</td>
+				<td>{{a.safeLevel}}</td>
+				<td>{{a.result}}</td>
+				<td></td>
+			</tr>
+		</table>
 
-    <p>
-      In general, EPA considers any floor dust results below 10 micrograms per
-      square foot (ug/ft2) to be safe. Windowsill samples are safe when they are
-      below 100 (ug/ft2).
-    </p>
+		<p>
+			In general, EPA considers any floor dust results below 10 micrograms per
+			square foot (ug/ft2) to be safe. Windowsill samples are safe when they are
+			below 100 (ug/ft2).
+		</p>
 
-    <p style="margin-bottom: 0;"><b>If all results are LOW:</b></p>
-    <p style="text-indent: 30px;margin : 0;">
-      All of the dust samples collected from your home were below a level
-      considered hazardous to children seven years of age or younger.
-    </p>
+		<p style="margin-bottom: 0;"><b>If all results are LOW:</b></p>
+		<p style="text-indent: 30px;margin : 0;">
+			All of the dust samples collected from your home were below a level
+			considered hazardous to children seven years of age or younger.
+		</p>
 
-    <p style="margin-bottom: 0;">
-      <b>If one or more of the floor samples is 10 or more:</b>
-    </p>
-    <p style="text-indent: 30px;margin : 0;">
-      At least one of the samples from the floor of your home had a lead level
-      that would be considered unsafe for children seven years of age or
-      younger. The Douglas County Health Department has developed a Fact Sheet
-      which includes tips that will help reduce the amount of lead in your home.
-      Following these tips will help reduce the amount of lead dust in your
-      house. A copy of this fact sheet is enclosed with this letter.
-    </p>
+		<p style="margin-bottom: 0;">
+			<b>If one or more of the floor samples is 10 or more:</b>
+		</p>
+		<p style="text-indent: 30px;margin : 0;">
+			At least one of the samples from the floor of your home had a lead level
+			that would be considered unsafe for children seven years of age or
+			younger. The Douglas County Health Department has developed a Fact Sheet
+			which includes tips that will help reduce the amount of lead in your home.
+			Following these tips will help reduce the amount of lead dust in your
+			house. A copy of this fact sheet is enclosed with this letter.
+		</p>
 
-    <p style="margin-bottom: 0;">
-      <b>If the windowsill sample is 100 or greater:</b>
-    </p>
-    <p style="text-indent: 30px;margin : 0;">
-      The dust collected from your windowsill is at a level that would be
-      considered hazardous to children seven years of age or younger. Wipe dust
-      off windowsills often to reduce human exposure. In addition, the Douglas
-      County Health Department has developed a Fact Sheet which includes tips
-      that will help reduce the amount of lead in your home. Following these
-      tips will reduce the amount of lead tracked into your home. A copy of this
-      fact sheet is enclosed with this letter.
-    </p>
+		<p style="margin-bottom: 0;">
+			<b>If the windowsill sample is 100 or greater:</b>
+		</p>
+		<p style="text-indent: 30px;margin : 0;">
+			The dust collected from your windowsill is at a level that would be
+			considered hazardous to children seven years of age or younger. Wipe dust
+			off windowsills often to reduce human exposure. In addition, the Douglas
+			County Health Department has developed a Fact Sheet which includes tips
+			that will help reduce the amount of lead in your home. Following these
+			tips will reduce the amount of lead tracked into your home. A copy of this
+			fact sheet is enclosed with this letter.
+		</p>
 
-    <p style="margin-bottom: 0;">
-      <b>If both floor and windowsill samples are high:</b>
-    </p>
-    <p style="text-indent: 30px;margin : 0;">
-      The dust collected from your floor and windowsill are at levels that would
-      be considered hazardous to children seven years of age or younger. The
-      Douglas County Health Department has developed a Fact Sheet which includes
-      tips that will help reduce the lead in your home. A copy of this fact
-      sheet is enclosed with this letter.
-    </p>
-    <br />
+		<p style="margin-bottom: 0;">
+			<b>If both floor and windowsill samples are high:</b>
+		</p>
+		<p style="text-indent: 30px;margin : 0;">
+			The dust collected from your floor and windowsill are at levels that would
+			be considered hazardous to children seven years of age or younger. The
+			Douglas County Health Department has developed a Fact Sheet which includes
+			tips that will help reduce the lead in your home. A copy of this fact
+			sheet is enclosed with this letter.
+		</p>
+		<br />
 
-    <p style="text-indent: 30px;margin : 0;">
-      The Douglas County Health Department has an active childhood blood lead
-      prevention program. It is always available to answer questions and offer
-      advice on promoting a lead safe home environment. Our staff can be reached
-      at (402) 444-7825.
-    </p>
-    <br />
+		<p style="text-indent: 30px;margin : 0;">
+			The Douglas County Health Department has an active childhood blood lead
+			prevention program. It is always available to answer questions and offer
+			advice on promoting a lead safe home environment. Our staff can be reached
+			at (402) 444-7825.
+		</p>
+		<br />
 
-    <p>
-      Naudia McCracken, MPH<br/>
+		<p>
+			Naudia McCracken, MPH<br/>
       Acting Program Supervisor<br/>
       Childhood Lead Poisoning Prevention Program<br/>
       Division of Environmental Health<br/>
     </p>
-  </div>
+	</div>
 </div>
 
 <div class="containerTest" style="display: none;">
-  <div class="row">
-    <div class="col-md-12">
-      <button
+	<div class="row">
+		<div class="col-md-12">
+			<button
         type="button"
         class="btn btn-primary mt-2 mb-2"
         (click)="htmltoPDF()"
@@ -130,34 +128,34 @@
       >
         Convert
       </button>
-    </div>
-    <div class="col-md-10 col-md-offset-1 border border-info">
-      <div id="contentTest">
-        <h1>Html2Pdf</h1>
+		</div>
+		<div class="col-md-10 col-md-offset-1 border border-info">
+			<div id="contentTest">
+				<h1>Html2Pdf</h1>
 
-        <h2>Colors</h2>
-        <p>
-          <span style="color: red">red</span>
-          <span style="color: rgb(0, 255, 0)">rgb(0,255,0)</span>
-          <span style="color: rgba(0, 0, 0, .5)">rgba(0,0,0,.5)</span>
-          <span style="color: #0000FF">#0000FF</span>
-          <span style="color: #0FF">#0FF</span>
-        </p>
+				<h2>Colors</h2>
+				<p>
+					<span style="color: red">red</span>
+					<span style="color: rgb(0, 255, 0)">rgb(0,255,0)</span>
+					<span style="color: rgba(0, 0, 0, .5)">rgba(0,0,0,.5)</span>
+					<span style="color: #0000FF">#0000FF</span>
+					<span style="color: #0FF">#0FF</span>
+				</p>
 
-        <h2>Text Alignment</h2>
-        <div style="text-align: left">left</div>
-        <div style="text-align: center">center</div>
-        <div style="text-align: right">right</div>
+				<h2>Text Alignment</h2>
+				<div style="text-align: left">left</div>
+				<div style="text-align: center">center</div>
+				<div style="text-align: right">right</div>
 
-        <h1 style="page-break-before: always; margin-top:100px;">Page Two</h1>
-        <p>
-          This demo uses Html2Canvas.js to render HTML. <br />Instead of using
+				<h1 style="page-break-before: always; margin-top:100px;">Page Two</h1>
+				<p>
+					This demo uses Html2Canvas.js to render HTML. <br />Instead of using
           an HTML canvas however, a canvas wrapper using jsPDF is substituted.
           The <em>context2d</em> provided by the wrapper calls native PDF
-          rendering methods.
-        </p>
+					rendering methods.
+				</p>
 
-        <!--<div>
+				<!--<div>
           <img src="../assets/images/background.jpg" height="100px" class="rounded" alt="background">
         </div>
 
@@ -165,142 +163,142 @@
           <img src="../assets/images/background.jpg" height="100px" class="rounded" alt="background">
         </div>-->
 
-        <p>A PDF of this page will be inserted into the right margin.</p>
+				<p>A PDF of this page will be inserted into the right margin.</p>
 
-        <h2>Colors</h2>
-        <p>
-          <span style="color: red">red</span>
-          <span style="color: rgb(0, 255, 0)">rgb(0,255,0)</span>
-          <span style="color: rgba(0, 0, 0, .5)">rgba(0,0,0,.5)</span>
-          <span style="color: #0000FF">#0000FF</span>
-          <span style="color: #0FF">#0FF</span>
-        </p>
+				<h2>Colors</h2>
+				<p>
+					<span style="color: red">red</span>
+					<span style="color: rgb(0, 255, 0)">rgb(0,255,0)</span>
+					<span style="color: rgba(0, 0, 0, .5)">rgba(0,0,0,.5)</span>
+					<span style="color: #0000FF">#0000FF</span>
+					<span style="color: #0FF">#0FF</span>
+				</p>
 
-        <h1 style="page-break-before: always; margin-top:100px;">
-          Yet Another Page
-        </h1>
-        <h2>Text Alignment</h2>
-        <div style="text-align: left">left</div>
-        <div style="text-align: center">center</div>
-        <div style="text-align: right">right</div>
-        <h2>Look here</h2>
-        <p>
-          This demo uses Html2Canvas.js to render HTML. <br />Instead of using
+				<h1 style="page-break-before: always; margin-top:100px;">
+					Yet Another Page
+				</h1>
+				<h2>Text Alignment</h2>
+				<div style="text-align: left">left</div>
+				<div style="text-align: center">center</div>
+				<div style="text-align: right">right</div>
+				<h2>Look here</h2>
+				<p>
+					This demo uses Html2Canvas.js to render HTML. <br />Instead of using
           an HTML canvas however, a canvas wrapper using jsPDF is substituted.
           The <em>context2d</em> provided by the wrapper calls native PDF
-          rendering methods. This demo uses Html2Canvas.js to render HTML.
-          Instead of using an HTML canvas however, a canvas wrapper using jsPDF
-          is substituted. The <em>context2d</em> provided by the wrapper calls
-          native PDF rendering methods.
-        </p>
-        <p>A PDF of this page will be inserted into the right margin.</p>
+					rendering methods. This demo uses Html2Canvas.js to render HTML.
+					Instead of using an HTML canvas however, a canvas wrapper using jsPDF
+					is substituted. The <em>context2d</em> provided by the wrapper calls
+					native PDF rendering methods.
+				</p>
+				<p>A PDF of this page will be inserted into the right margin.</p>
 
-        <h2>Colors</h2>
-        <p>
-          <span style="color: red">red</span>
-          <span style="color: rgb(0, 255, 0)">rgb(0,255,0)</span>
-          <span style="color: rgba(0, 0, 0, .5)">rgba(0,0,0,.5)</span>
-          <span style="color: #0000FF">#0000FF</span>
-          <span style="color: #0FF">#0FF</span>
-        </p>
+				<h2>Colors</h2>
+				<p>
+					<span style="color: red">red</span>
+					<span style="color: rgb(0, 255, 0)">rgb(0,255,0)</span>
+					<span style="color: rgba(0, 0, 0, .5)">rgba(0,0,0,.5)</span>
+					<span style="color: #0000FF">#0000FF</span>
+					<span style="color: #0FF">#0FF</span>
+				</p>
 
-        <h2>Text Alignment</h2>
-        <div style="text-align: left">left</div>
-        <div style="text-align: center">center</div>
-        <div style="text-align: right">right</div>
-        <p>
-          This demo uses Html2Canvas.js to render HTML. <br />Instead of using
+				<h2>Text Alignment</h2>
+				<div style="text-align: left">left</div>
+				<div style="text-align: center">center</div>
+				<div style="text-align: right">right</div>
+				<p>
+					This demo uses Html2Canvas.js to render HTML. <br />Instead of using
           an HTML canvas however, a canvas wrapper using jsPDF is substituted.
           The <em>context2d</em> provided by the wrapper calls native PDF
-          rendering methods.
-        </p>
-        <p>A PDF of this page will be inserted into the right margin.</p>
+					rendering methods.
+				</p>
+				<p>A PDF of this page will be inserted into the right margin.</p>
 
-        <h2>Colors</h2>
-        <p>
-          <span style="color: red">red</span>
-          <span style="color: rgb(0, 255, 0)">rgb(0,255,0)</span>
-          <span style="color: rgba(0, 0, 0, .5)">rgba(0,0,0,.5)</span>
-          <span style="color: #0000FF">#0000FF</span>
-          <span style="color: #0FF">#0FF</span>
-        </p>
+				<h2>Colors</h2>
+				<p>
+					<span style="color: red">red</span>
+					<span style="color: rgb(0, 255, 0)">rgb(0,255,0)</span>
+					<span style="color: rgba(0, 0, 0, .5)">rgba(0,0,0,.5)</span>
+					<span style="color: #0000FF">#0000FF</span>
+					<span style="color: #0FF">#0FF</span>
+				</p>
 
-        <h2>Text Alignment</h2>
-        <div style="text-align: left">left</div>
-        <div style="text-align: center">center</div>
-        <div style="text-align: right">right</div>
+				<h2>Text Alignment</h2>
+				<div style="text-align: left">left</div>
+				<div style="text-align: center">center</div>
+				<div style="text-align: right">right</div>
 
-        <h1 style="page-break-before: always;">Yet Another Page</h1>
-        <p>Hello there</p>
-        <p>Hello there</p>
-        <p>Hello there</p>
-        <p>Hello there</p>
-        <p>Hello there</p>
-        <p>Hello there</p>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Default</td>
-              <td>Defaultson</td>
-              <td>def@somemail.com</td>
-            </tr>
-            <tr>
-              <td>Primary</td>
-              <td>Joe</td>
-              <td>joe@example.com</td>
-            </tr>
-            <tr>
-              <td>Success</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
-            </tr>
-            <tr>
-              <td>Danger</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>Info</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
-            <tr>
-              <td>Warning</td>
-              <td>Refs</td>
-              <td>bo@example.com</td>
-            </tr>
-            <tr>
-              <td>Active</td>
-              <td>Activeson</td>
-              <td>act@example.com</td>
-            </tr>
-            <tr>
-              <td>Secondary</td>
-              <td>Secondson</td>
-              <td>sec@example.com</td>
-            </tr>
-            <tr>
-              <td>Light</td>
-              <td>Angie</td>
-              <td>angie@example.com</td>
-            </tr>
-            <tr>
-              <td>Dark</td>
-              <td>Bo</td>
-              <td>bo@example.com</td>
-            </tr>
-          </tbody>
-        </table>
+				<h1 style="page-break-before: always;">Yet Another Page</h1>
+				<p>Hello there</p>
+				<p>Hello there</p>
+				<p>Hello there</p>
+				<p>Hello there</p>
+				<p>Hello there</p>
+				<p>Hello there</p>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Firstname</th>
+							<th>Lastname</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Default</td>
+							<td>Defaultson</td>
+							<td>def@somemail.com</td>
+						</tr>
+						<tr>
+							<td>Primary</td>
+							<td>Joe</td>
+							<td>joe@example.com</td>
+						</tr>
+						<tr>
+							<td>Success</td>
+							<td>Doe</td>
+							<td>john@example.com</td>
+						</tr>
+						<tr>
+							<td>Danger</td>
+							<td>Moe</td>
+							<td>mary@example.com</td>
+						</tr>
+						<tr>
+							<td>Info</td>
+							<td>Dooley</td>
+							<td>july@example.com</td>
+						</tr>
+						<tr>
+							<td>Warning</td>
+							<td>Refs</td>
+							<td>bo@example.com</td>
+						</tr>
+						<tr>
+							<td>Active</td>
+							<td>Activeson</td>
+							<td>act@example.com</td>
+						</tr>
+						<tr>
+							<td>Secondary</td>
+							<td>Secondson</td>
+							<td>sec@example.com</td>
+						</tr>
+						<tr>
+							<td>Light</td>
+							<td>Angie</td>
+							<td>angie@example.com</td>
+						</tr>
+						<tr>
+							<td>Dark</td>
+							<td>Bo</td>
+							<td>bo@example.com</td>
+						</tr>
+					</tbody>
+				</table>
 
-        <!-- <p *ngFor="let p of paragraphs$ | async">{{p.body}}</p> -->
-      </div>
-    </div>
-  </div>
+				<!-- <p *ngFor="let p of paragraphs$ | async">{{p.body}}</p> -->
+			</div>
+		</div>
+	</div>
 </div>

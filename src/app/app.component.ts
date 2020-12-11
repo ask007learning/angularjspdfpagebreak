@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
     // this.paragraphs$ = this.http.get<any[]>(
     //   "https://jsonplaceholder.typicode.com/comments"
     // );
-    // this.htmltoPDF();
-    this.generatePdfFromCode();
+    this.htmltoPDF();
+    // this.generatePdfFromCode();
   }
 
   setFontType(pdf, type: string = "normal", font: string = "times") {
@@ -34,19 +34,31 @@ export class AppComponent implements OnInit {
   }
 
   generatePdfFromCode() {
-    let marginY = 20;
+    let marginY = 5;
     let marginX = 10;
-    const pdf = new jsPDF();
+    const pdf = new jsPDF("p", "mm", "a4");
+    // const pdf = new jsPDF("p", "mm", [ 595.28,  841.89])
+    // const pdf = new jsPDF();
+
     this.setFontType(pdf);
 
     pdf.addImage(
-      "assets/dustLogo2.jpg",
+      "https://raw.githubusercontent.com/ask007learning/angularjspdfpagebreak/master/src/assets/dustLogoTop.jpg",
       "JPEG",
-      marginX + 20,
-      marginY + 30,
-      50,
-      50
+      marginX + 25,
+      marginY,
+      170,
+      25
     );
+
+    // pdf.addImage(
+    //   "https://raw.githubusercontent.com/ask007learning/angularjspdfpagebreak/master/src/assets/dustLogoSide.jpg",
+    //   "JPEG",
+    //   marginX ,
+    //   marginY + 30,
+    //   25,
+    //   200
+    // );
 
     //Header
     // pdf.setFontSize(14);
@@ -57,7 +69,7 @@ export class AppComponent implements OnInit {
     // );
 
     pdf.setFontSize(12);
-    pdf.text("November 4, 2020", marginX, marginY);
+    pdf.text("November 4, 2020", marginX, (marginY += 35));
     pdf.text("Dear Owner name,", marginX, (marginY += 10));
 
     const para1 = this.splitStringPdf(
@@ -124,7 +136,7 @@ export class AppComponent implements OnInit {
     pdf.text(
       "If the windowsill sample is 100 or greater:",
       marginX,
-      (marginY += 30)
+      (marginY += 25)
     );
     this.setFontType(pdf);
     const para5 = this.splitStringPdf(
@@ -150,9 +162,9 @@ export class AppComponent implements OnInit {
       pdf,
       `The Douglas County Health Department has an active childhood blood lead prevention program. It is always available to answer questions and offer advice on promoting a lead safe home environment. Our staff can be reached at (402) 444-7825.`
     );
-    pdf.text(marginX, (marginY += 25), para7);
+    pdf.text(marginX, (marginY += 20), para7);
 
-    pdf.text("Naudia McCracken, MPH", marginX, (marginY += 25));
+    pdf.text("Naudia McCracken, MPH", marginX, (marginY += 20));
     pdf.text("Acting Program Supervisor", marginX, (marginY += 5));
     pdf.text(
       "Childhood Lead Poisoning Prevention Program",
@@ -160,6 +172,8 @@ export class AppComponent implements OnInit {
       (marginY += 5)
     );
     pdf.text("Division of Environmental Health", marginX, (marginY += 5));
+
+    return pdf;
 
     const iframe = document.createElement("iframe");
     iframe.setAttribute(
@@ -175,8 +189,8 @@ export class AppComponent implements OnInit {
     return para;
   }
 
-  htmltoPDF(margins = this.margins) {
-    const pdf = this.generatePdf(margins);
+  htmltoPDF() {
+    const pdf = this.generatePdfFromCode();
     const iframe = document.createElement("iframe");
     iframe.setAttribute(
       "style",
@@ -188,59 +202,12 @@ export class AppComponent implements OnInit {
 
   downloadPDF(margins = this.margins) {
     // content is the html element which has to be converted to PDF
-    const pdf = this.generatePdf(margins);
+    const pdf = this.generatePdfFromCode();
     pdf.save("file.pdf");
   }
 
-  generatePdf(margins = this.margins) {
-    const pdf = new jsPDF("p", "pt", "a4");
-    pdf.setFontSize(18);
-    pdf.fromHTML(
-      document.getElementById("content"),
-      margins.left, // x coordinate
-      margins.top,
-      {
-        // y coordinate
-        width: margins.width // max width of content on PDF
-      },
-      dispose => {
-        // this.headerFooterFormatting(pdf, pdf.internal.getNumberOfPages());
-      },
-      margins
-    );
-    return pdf;
-  }
-
-  buildReport() {
-    const pdf = new jsPDF();
-  }
-
-  headerFooterFormatting(doc, totalPages) {
-    for (let i = totalPages; i >= 1; i--) {
-      doc.setPage(i);
-      // add header
-      this.header(doc);
-
-      // add page number to footer
-      this.footer(doc, i, totalPages);
-      doc.page++;
-    }
-  }
-
-  header(doc, margins = this.margins) {
-    doc.setFontSize(30);
-    doc.setTextColor(40);
-    doc.setFontStyle("normal");
-
-    doc.text("Header Template", margins.left + 50, 40);
-    doc.setLineCap(2);
-    // doc.line(3, 70, margins.width + 43, 70); // horizontal line
-  }
-
-  footer(doc, pageNumber, totalPages, margins = this.margins) {
-    const str = "Page " + pageNumber + " of " + totalPages + " By Leonel E.";
-
-    doc.setFontSize(10);
-    doc.text(str, margins.left, doc.internal.pageSize.height - 20);
+  viewInTab() {
+    const pdf = this.generatePdfFromCode();
+    window.open(pdf.output("bloburl"), "_blank");
   }
 }
