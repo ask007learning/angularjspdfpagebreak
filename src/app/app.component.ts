@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // this.paragraphs$ = this.http.get<any[]>(
-    //   "https://jsonplaceholder.typicode.com/comments" 
+    //   "https://jsonplaceholder.typicode.com/comments"
     // );
     this.htmltoPDF();
     // this.generatePdfFromCode();
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
     );
 
     pdf.addImage(
-      "https://raw.githubusercontent.com/ask007learning/angularjspdfpagebreak/master/src/assets/dustLogoSide1.jpg",
+      "https://raw.githubusercontent.com/ask007learning/angularjspdfpagebreak/master/src/assets/dustLogoSide2.jpg",
       "JPEG",
       5,
       marginY + 30,
