@@ -146,6 +146,15 @@ export class AppComponent implements OnInit {
     );
     pdf.text(marginX, (marginY += 25), para7);
 
+    pdf.addImage(
+      "https://raw.githubusercontent.com/ask007learning/angularjspdfpagebreak/master/src/assets/naudiaSignature.jpg",
+      "JPEG",
+      marginX,
+      (marginY += 25),
+      80,
+      20
+    );
+
     pdf.text("Naudia McCracken, MPH", marginX, (marginY += 25));
     pdf.text("Acting Program Supervisor", marginX, (marginY += 5));
     pdf.text(
