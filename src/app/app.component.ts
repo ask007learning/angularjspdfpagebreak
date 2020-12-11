@@ -33,6 +33,11 @@ export class AppComponent implements OnInit {
     return pdf;
   }
 
+  splitStringPdf(pdf, txt, indent = "true") {
+    const para = pdf.splitTextToSize(indent ? "     " + txt : txt, 190);
+    return para;
+  }
+
   generatePdfFromCode() {
     let marginY = 5;
     let marginX = 10;
@@ -45,9 +50,9 @@ export class AppComponent implements OnInit {
     pdf.addImage(
       "https://raw.githubusercontent.com/ask007learning/angularjspdfpagebreak/master/src/assets/dustLogoTop.jpg",
       "JPEG",
-      marginX + 25,
+      marginX + 30,
       marginY,
-      170,
+      160,
       25
     );
 
@@ -70,7 +75,7 @@ export class AppComponent implements OnInit {
 
     pdf.setFontSize(12);
     pdf.text("November 4, 2020", marginX, (marginY += 35));
-    pdf.text("Dear Owner name,", marginX, (marginY += 10));
+    pdf.text("Dear Owner name,", marginX, (marginY += 5));
 
     const para1 = this.splitStringPdf(
       pdf,
@@ -162,7 +167,7 @@ export class AppComponent implements OnInit {
       pdf,
       `The Douglas County Health Department has an active childhood blood lead prevention program. It is always available to answer questions and offer advice on promoting a lead safe home environment. Our staff can be reached at (402) 444-7825.`
     );
-    pdf.text(marginX, (marginY += 20), para7);
+    pdf.text(marginX, (marginY += 25), para7);
 
     pdf.text("Naudia McCracken, MPH", marginX, (marginY += 20));
     pdf.text("Acting Program Supervisor", marginX, (marginY += 5));
@@ -182,11 +187,6 @@ export class AppComponent implements OnInit {
     );
     document.body.appendChild(iframe);
     iframe.src = pdf.output("datauristring");
-  }
-
-  splitStringPdf(pdf, txt) {
-    const para = pdf.splitTextToSize(txt, 190);
-    return para;
   }
 
   htmltoPDF() {
